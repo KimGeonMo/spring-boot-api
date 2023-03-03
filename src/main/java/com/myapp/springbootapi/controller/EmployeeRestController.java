@@ -2,10 +2,7 @@ package com.myapp.springbootapi.controller;
 
 import com.myapp.springbootapi.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
@@ -37,9 +34,12 @@ public class EmployeeRestController {
      * @param {int} pageNo
      * return Map
      * */
-    @GetMapping("list")
-    public Map<String, Object> list(@RequestParam(value = "pageNo", required = false, defaultValue = "1") int pageNo) {
-        return employeeService.list(pageNo);
+    @GetMapping("list/{pageNo}/{pageLimit}")
+    @CrossOrigin(value = "*")
+    public Map<String, Object> list(
+            @PathVariable("pageNo") int pageNo,
+            @PathVariable("pageLimit") int pageLimit) {
+        return employeeService.list(pageNo, pageLimit);
     }
 
 }

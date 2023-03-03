@@ -11,8 +11,6 @@ import java.util.Map;
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
 
-    private static final int VIEW_EMPLOYEE_SIZE = 3;
-
     @Autowired
     private EmployeeMapper employeeMapper;
 
@@ -22,12 +20,12 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public Map<String, Object> list(int pageNo) {
+    public Map<String, Object> list(int pageNo, int pageLimit) {
         Map<String, Object> result = new HashMap<String, Object>();
 
         try {
             result.put("totalCount", employeeMapper.totalCnt());
-            result.put("employeeList", employeeMapper.getList(pageNo, VIEW_EMPLOYEE_SIZE));
+            result.put("employeeList", employeeMapper.getList(pageNo, pageLimit));
         } catch(Exception e) {
             result = new HashMap<String, Object>();
             e.printStackTrace();
