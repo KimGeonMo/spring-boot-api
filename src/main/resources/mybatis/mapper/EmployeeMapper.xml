@@ -2,7 +2,26 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.myapp.springbootapi.mapper.EmployeeMapper">
+
     <select id="dbAccess" resultType="String">
+        /* db access test*/
         select 1
     </select>
+
+    <select id="totalCnt" resultType="int">
+        select count(*) from api.employee
+    </select>
+
+    <select id="getList" resultType="com.myapp.springbootapi.model.EmployeeVO">
+        select
+            id,
+            name,
+            rank,
+            department
+        from api.employee
+        offset #{size}::integer * (#{pageNo}::integer - 1)
+        limit #{size}::integer
+
+    </select>
+
 </mapper>
